@@ -11,27 +11,55 @@ Title: Transition State Calculation
 ## 2.Cl-NEB Methods
 ### 2.1 Generate intermediate images
 
-'dist.py' can be used to find similarity of initial structure and final strcutre. Here disy.py calculates distance summation of  all the corresponding atoms. The output will be smaller than 5 Å. Remember to check whether the numbering is one-to-one correspondence bewteen intital state and final state.
+:::details
 
->dist.pl POSCARis POSCARfs
->7.91680185884989
+`dist.py` can be used to find similarity of initial structure and final strcutre. Here disy.py calculates distance summation of  all the corresponding atoms. The output will be smaller than 5 Å. Remember to check whether the numbering is one-to-one correspondence bewteen intital state and final state.
+```
+$dist.pl POSCARis POSCARfs
+> 7.91680185884989
+```
 
+'idpp.py' will be used for generate 4 images. The nuber of images can be approximated by value od dist.pl/0.8.The prequistes is that the system supports PYMATGEN.
+```
+$module load anaconda3
+$conda activate pymatgen
+$python3 idpp.py POSCARis POSCARfs 4
+```
+This will give follwing files. Remember to add strcuture optimization OUTCAR of initial strcuture of final structure into 00 and 05. 
+```
+> 00 01 02 03 04 05 
+```
+To check whether the images are reasonable, `nebmovie` will give 'movie' and `movie.xyz`. The `ase.gui` supports `movie`.
+`jmol` supports `movie.xyz`.
+Go to `nebmovie.pl`, annotate final 5-7 lines. 
+![image](https://user-images.githubusercontent.com/108607220/177042962-8c683a14-dae8-47a3-9462-0899c697f4f7.png)
 
-'green idpp.py' will be used for generate 4 images. The nuber of images can be approximated by value od dist.pl/0.8.The prequistes is that the system supports PYMATGEN.
 ```
->module load anaconda3
->conda activate pymatgen
->python3 idpp.py POSCARis POSCARfs 4
-```
-This will give follwing files.
-```
->00 01 02 03 04 05 
-```
-To check whether the images are reasonable, 
-
 > nebmovie.pl 0 #0 represents xyx file is generated from POSCAR. 1 represents CONTCAR. 
-
-
+```
+### 2.2 Write `INCAR` file
+```
+-EDIFF=1E-7  #Very Important. Precious electrons steps gives precious forces which is helpful for the convergence of Transition State.
+-EDIFFG = -0.03 #
+-IBRION = 3, POTIM = 0 #Start VTST optimization
+-IOPT = 1 # IOPT = 1 or 2 for highly convergence. IOPT=7 for rough convergence.
+![image](https://user-images.githubusercontent.com/108607220/177042368-bbf13197-37f2-4157-b132-b1dc104e8153.png)
+-ICHAIN = 0 #Start NEB methods
+-LCLIMB = .TRUE. #Cl-NEB
+IMAGES = 1 # Number of intermediate images
+SPRING = -5 #
+```
+### 2.3 Same POTCAR and KPOINTS 
+### 2.4 Trace and check convergence results
+`nebmovie.pl`  for visulization. Use `nebef.pl` or 'nebefs.pl`to check convergence situation during calculations.
+>nebef.pl      # Only 0-3 if no OUTCAR in 00 and O5 
+      Forces           Energy              Energy versus initial state
+>0    
+>1
+>2
+>3
+>4
+>5
 
 
 
