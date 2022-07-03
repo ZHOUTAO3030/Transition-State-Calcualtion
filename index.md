@@ -4,6 +4,10 @@ A transition structure is the molecular configuration that separates reactants a
 
 
 ## Cl-NEB
+![Example](https://user-images.githubusercontent.com/108607220/177032214-5ac790ed-91ab-4c26-a589-00fa08188ad9.png)
+
+## Dimer
+![image](https://user-images.githubusercontent.com/108607220/177032398-5cf282e6-3dbf-47a5-a106-2fd3ded0cbb1.png)
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
