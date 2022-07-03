@@ -17,13 +17,17 @@ Title: Transition State Calculation
 >7.91680185884989
 
 
-' idpp.py ' will be used for generate 4 images. The nuber of images can be approximated by value od dist.pl/0.8.The prequistes is that the system supports PYMATGEN.
-
->module load anaconda3\
->conda activate pymatgen\
+'green idpp.py' will be used for generate 4 images. The nuber of images can be approximated by value od dist.pl/0.8.The prequistes is that the system supports PYMATGEN.
+```
+>module load anaconda3
+>conda activate pymatgen
 >python3 idpp.py POSCARis POSCARfs 4
-
+```
+This will give follwing files.
+```
 >00 01 02 03 04 05 
+```
+To check whether the images are reasonable, 
 
 > nebmovie.pl 0 #0 represents xyx file is generated from POSCAR. 1 represents CONTCAR. 
 
@@ -54,7 +58,7 @@ A transition structure is the molecular configuration that separates reactants a
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
+```
 Syntax highlighted code block
 
 # Header 1
